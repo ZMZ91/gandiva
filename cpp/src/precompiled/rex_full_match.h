@@ -27,10 +27,11 @@
 using std::string;
 using kv_map = std::unordered_map<string, string>;
 
-kv_map rex_full_match(const string& raw_message, const string& pattern_string,
-                      bool in_valid, bool* out_valid) {
+kv_map rex_full_match_utf8_utf8(const string& raw_message, const string& pattern_string,
+                                bool in_valid, bool* out_valid) {
   // output is invalid.
   *out_valid = false;
+  // may need to stringify kv_map into utf8 as return type
   kv_map ret;
   if (in_valid) {
     re2::StringPiece input(raw_message);

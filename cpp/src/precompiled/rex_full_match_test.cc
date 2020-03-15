@@ -18,7 +18,7 @@
 
 namespace gandiva {
 
-TEST(TestRexFullMatch, rex_full_match) {
+TEST(TestRexFullMatch, rex_full_match_utf8_utf8) {
   bool in_valid = true;
   bool out_valid = false;
   kv_map ret;
@@ -39,19 +39,19 @@ TEST(TestRexFullMatch, rex_full_match) {
       "NT|iPhone|compatible).+";
 
   // all parameters valid
-  ret = rex_full_match(raw_message, pattern_string, in_valid, &out_valid);
+  ret = rex_full_match_utf8_utf8(raw_message, pattern_string, in_valid, &out_valid);
   EXPECT_EQ(ret, bench_mark);
   EXPECT_EQ(out_valid, true);
 
   // in_valid is false
   in_valid = false;
-  ret = rex_full_match(raw_message, pattern_string, in_valid, &out_valid);
+  ret = rex_full_match_utf8_utf8(raw_message, pattern_string, in_valid, &out_valid);
   EXPECT_EQ(ret, kv_map());
   EXPECT_EQ(out_valid, false);
 
   // raw_message is less than the pattern
   in_valid = true;
-  ret = rex_full_match(
+  ret = rex_full_match_utf8_utf8(
       "107.173.176.148 - - [13/Dec/2015:05:11:56 +0100] \"GET /apache-log/access.log "
       "HTTP/1.1\" 200 97106 \"http://www.almhuette-raith.at/\"",
       pattern_string, in_valid, &out_valid);
@@ -60,7 +60,7 @@ TEST(TestRexFullMatch, rex_full_match) {
 
   // pattern is less than the raw_message
   in_valid = true;
-  ret = rex_full_match(
+  ret = rex_full_match_utf8_utf8(
       raw_message,
       ".+ (?P<aurl>/[0-9a-zA-Z\\./\\-\\_\\~]*) +(?P<aversion>HTTP/[0-9]+\\.[0-9]+).+ "
       "[0-9]{3} +(?P<abytes>[0-9\\-]+) .+\\((?P<aos>Macintosh|Windows "

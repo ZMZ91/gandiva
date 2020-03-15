@@ -424,6 +424,10 @@ NativeFunction FunctionRegistry::pc_registry_[] = {
     // Null internal (sample)
     NativeFunction("half_or_null", DataTypeVector{int32()}, int32(), RESULT_NULL_INTERNAL,
                    "half_or_null_int32"),
+
+    // Rex full match
+    NativeFunction("rex_full_match", DataTypeVector{utf8(), utf8()}, utf8(),
+                   RESULT_NULL_INTERNAL, "rex_full_match_utf8_utf8"),
 };  // namespace gandiva
 
 FunctionRegistry::iterator FunctionRegistry::begin() const {
